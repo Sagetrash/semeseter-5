@@ -43,5 +43,6 @@ wt = [items[i][1] for i in range(len(items))]
 k = knapsack(vl,wt,cap)
 k.knap01()
 k.showTable()
+print(k.maxValue)
 for i in k.getItems():
     print([items[i][2]])
