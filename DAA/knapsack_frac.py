@@ -21,7 +21,6 @@ class knapsackFrac:
     def showTable(self):
         for i in self.table: print(i)
 
-items = [[300,2,"microscope"],[200,1,"Globe"],[400,5,"trophy"],[500,3,"crown"]] #([values,weight,item no.])
 val = [60, 100, 120]
 wt = [10, 20, 30]
 capacity = 50

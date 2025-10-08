@@ -13,11 +13,12 @@ class knapsack:
         for i in range(1,n+1): #fetermining rows (item number)
             for j in range(1,cap + 1): #determining capacity number
                 if wt[i-1] <= j: 
-                    item_included = table[i-1][j-wt[i-1]] + vl[i-1] 
+                    item_included = table[i-1][j-wt[i-1]] + vl[i-1]
                     item_excluded = table[i-1][j]
                     table [i][j] = max(item_included,item_excluded)
                 else:
                     table[i][j] = table[i-1][j]
+                    
         self.table = table
         self.maxValue = table[n][cap]
 

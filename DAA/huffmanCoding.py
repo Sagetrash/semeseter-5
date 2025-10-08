@@ -10,8 +10,10 @@ class Node:
 
 
 class HuffmanCoding: 
-    def __init__(self):
+    def __init__(self,word):
+        self.word = word
         self.nodelist = []
+        self.encode()
 
     def createNodes(self,word):
         freqdict = {}
@@ -24,16 +26,16 @@ class HuffmanCoding:
 
 
     def createTree(self):
-        nodes = self.nodelist
-        while (len(nodes)) > 1:
-            nodes = sorted(nodes,key=lambda x: x.freq)
-            left = nodes.pop(0)
-            right = nodes.pop(0)
+        while (len(self.nodelist)) > 1:
+            self.nodelist = sorted(self.nodelist,key=lambda x: x.freq)
+            left = self.nodelist.pop(0)
+            right = self.nodelist.pop(0)
+
             merged = Node(freq= (left.freq + right.freq))
             merged.left = left
             merged.right = right
-            nodes.append(merged)
-            self.nodelist = nodes
+            
+            self.nodelist.append(merged)
         return self.nodelist[0]
 
     def huffmanCode(self,node,current_code, codes):
@@ -46,15 +48,17 @@ class HuffmanCoding:
         self.huffmanCode(node.left,current_code + '0',codes)
         self.huffmanCode(node.right,current_code+ '1',codes)
     
-    def encode(self,word):
-        self.createNodes(word)
+    def encode(self):
+        self.createNodes(self.word)
         root = self.createTree()
         codes = {}
         self.huffmanCode(root,'',codes)
-        return codes
+        self.codes = codes
     
-        
+    def getCodes(self): return self.codes
+    def codeWord(self): return ''.join(self.codes[char] for char in self.word)
 
-h = HuffmanCoding()
-word = "lossless"
-print(h.encode(word))
+word = input("Enter the word you want to encode:")
+h = HuffmanCoding(word)
+print(h.getCodes())
+print(h.codeWord())
